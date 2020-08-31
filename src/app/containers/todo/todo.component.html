@@ -2,8 +2,10 @@
   <h2>To do list</h2>
 </header>
 <section>
-  <app-todo-entry></app-todo-entry>
+  <app-todo-entry (itemAdded)="addItem($event)"></app-todo-entry>
 </section>
 <section>
-  <app-todo-list></app-todo-list>
+  <app-todo-list caption="Your to do list here from parent"
+                 (itemCompleted)="markComplete($event)"
+                 [items]="todoList"></app-todo-list>
 </section>

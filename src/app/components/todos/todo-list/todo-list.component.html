@@ -1,8 +1,9 @@
+<h3>{{caption}}</h3>
 <ul class="list-unstyled">
   <li class="alert"
-      [ngClass]="{'alert-success':!item.completed, 'alert-info':item.completed}"
+      [ngClass]="{'alert-success': !item.completed, 'alert-info': item.completed}"
       *ngFor="let item of items">
-    <span [ngClass]="{'completed':item.completed}">{{ item.description}}</span>&nbsp;
+    <span [ngClass]="{'completed': item.completed}">{{ item.description }}</span>&nbsp;
     <button *ngIf="!item.completed"
             (click)="markComplete(item)"
             class="btn btn-sm btn-danger">X</button>
