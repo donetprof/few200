@@ -18,6 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterEffects } from './effects/counter.effects';
+import { MediaModule } from './features/media/media.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CounterEffects } from './effects/counter.effects';
   ],
   imports: [
     BrowserModule,
+    MediaModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
