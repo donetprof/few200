@@ -4,12 +4,28 @@ import * as actions from '../actions/list.actions';
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { ListEntity } from '../reducers/list.reducer';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 
 @Injectable()
 export class ListEffects {
+
+  removeItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.removeMediaItem),
+      switchMap((item) => this.client.delete(environment.apiUrl + `media/${item.payload.id}`)
+        .pipe(
+          filter(() => false),
+          map(() => ({ type: 'noop' })),
+          catchError((e) => of(actions.removedMediaItemFailure({
+            payload: item.payload,
+            errorMessage: ` Failed to delete ${item.payload.title}`
+          }))),
+        )
+      )
+    )
+  );
 
   addItems$ = createEffect(() =>
     this.actions$.pipe(
@@ -20,7 +36,7 @@ export class ListEffects {
         recommendedBy: originalAction.payload.recommendedBy,
       }).pipe(
         map(payload => actions.addedMediaItemSucceeded({ payload, tempId: originalAction.payload.id })),
-        catchError(() => of(actions.addedMediaItemFailure({ payload: originalAction.payload, errorMessage: 'Could not load' })))
+        catchError(() => of(actions.addedMediaItemFailure({ payload: originalAction.payload, errorMessage: `Could not load ${originalAction.payload.title}` })))
       ))
     ), { dispatch: true }
   );
