@@ -9,6 +9,12 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, featureName } from './reducers';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListFilterComponent } from './components/list-filter/list-filter.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { MediaAppEffects } from './effects/app.effects';
+import { ListEffects } from './effects/list.effects';
+
 const routes: Routes = [
   {
     path: 'media',
@@ -31,12 +37,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MediaComponent, DashboardComponent, ListComponent, CreateComponent, ItemListComponent],
+  declarations: [MediaComponent, DashboardComponent, ListComponent, CreateComponent, ItemListComponent, ListFilterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(featureName, reducers),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    EffectsModule.forFeature([MediaAppEffects, ListEffects])
   ]
 })
 export class MediaModule { }

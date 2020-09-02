@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { ListEntity } from '../reducers/list.reducer';
 
 let currentId = 0;
@@ -12,3 +12,18 @@ export const addedMediaItem = createAction(
     } as ListEntity
   })
 );
+
+export const loadMediaData = createAction(
+  '[media] load media data'
+);
+
+export const loadMediaDataSucceeded = createAction(
+  '[media] loading media data succeeded',
+  props<{ payload: ListEntity[] }>()
+);
+
+export const loadMediaDataFailed = createAction(
+  '[media] loading media data failed',
+  props<{ message: string }>()
+);
+

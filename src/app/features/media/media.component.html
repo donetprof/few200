@@ -1,4 +1,11 @@
-<div class="row">
+<div class="alert alert-info"
+     *ngIf="!(loaded$ | async)">
+  <h3>Still Loading your stuff</h3>
+  <img src="https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif"
+       alt="loading">
+</div>
+<div class="row"
+     *ngIf="(loaded$ | async)">
   <div class="col-2">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item">

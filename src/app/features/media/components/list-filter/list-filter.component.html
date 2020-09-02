@@ -1,0 +1,32 @@
+<div class="btn-toolbar"
+     role="toolbar"
+     aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2"
+       role="group"
+       aria-label="First group">
+    <button type="button"
+            [disabled]="(filter$ | async) ==='All'"
+            (click)="setFilter('All')"
+            class="btn btn-secondary">Show All</button>
+  </div>
+  <div class="btn-group mr-2"
+       role="group"
+       aria-label="Second group">
+    <button type="button"
+            [disabled]="(filter$ | async) ==='Book'"
+            (click)="setFilter('Book')"
+            class="btn btn-secondary">Show Books</button>
+    <button type="button"
+            [disabled]="(filter$ | async) ==='Movie'"
+            (click)="setFilter('Movie')"
+            class="btn btn-secondary">Show Movies</button>
+    <button type="button"
+            [disabled]="(filter$ | async) ==='Game'"
+            (click)="setFilter('Game')"
+            class="btn btn-secondary">Show Games</button>
+    <button type="button"
+            [disabled]="(filter$ | async) ==='Show'"
+            (click)="setFilter('Show')"
+            class="btn btn-secondary">Show Shows</button>
+  </div>
+</div>
