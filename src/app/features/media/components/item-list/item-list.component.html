@@ -7,7 +7,14 @@
      *ngFor="let item of items">
   <div class="card-body">
     <h5 class="card-title">{{ item.title }}</h5>
+    <h6 *ngIf="item.isTemporary">Saving...</h6>
     <h6 class="card-subtitle mb-2 text-muted">Recommended by {{ item.recommendedBy }}</h6>
     <p class="card-text">This is a {{ item.format }}</p>
+    <div *ngIf="!item.isTemporary">
+      <a href="#"
+         class="card-link">Remove This</a>
+      <a href="#"
+         class="card-link">Mark This As Consumed</a>
+    </div>
   </div>
 </div>

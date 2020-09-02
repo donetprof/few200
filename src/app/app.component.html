@@ -1,3 +1,11 @@
+<div class="alert alert-danger container-fluid"
+     *ngIf="hasError$ | async">
+  <h3>You have an error: {{ error$ | async }}</h3>
+  <div>
+    <button (click)="clearError()"
+            class="btn btn-sm btn-danger">X</button>
+  </div>
+</div>
 <header class="container-fluid jumbotron">
   <h1>Front-End Web 200</h1>
 </header>

@@ -10,6 +10,21 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class ListEffects {
+
+  addItems$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.addedMediaItem),
+      switchMap((originalAction) => this.client.post<ListEntity>(environment.apiUrl + 'media', {
+        title: originalAction.payload.title,
+        format: originalAction.payload.format,
+        recommendedBy: originalAction.payload.recommendedBy,
+      }).pipe(
+        map(payload => actions.addedMediaItemSucceeded({ payload, tempId: originalAction.payload.id })),
+        catchError(() => of(actions.addedMediaItemFailure({ payload: originalAction.payload, errorMessage: 'Could not load' })))
+      ))
+    ), { dispatch: true }
+  );
+
   // When we get a loadListData -> go to the API -> (loadListDataSucceeded | loadListDataFailed)
   loadData$ = createEffect(() =>
     this.actions$.pipe(

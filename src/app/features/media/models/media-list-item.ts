@@ -3,4 +3,5 @@ export interface MediaListItem {
   title: string;
   recommendedBy: string;
   format: string;
+  isTemporary: boolean;
 }
